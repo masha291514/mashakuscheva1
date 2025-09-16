@@ -1,0 +1,12 @@
+import random
+znaks = ["+","-","*","/"]
+i = 1
+expression = ""
+while i<=8:
+    znak = random.choice(znaks)
+    number = random.randint(1, 100)
+    expression = expression + str(number) 
+    if i!=8:
+         expression = expression+ znak
+    i=i+1
+print(expression)
