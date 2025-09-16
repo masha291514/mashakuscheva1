@@ -1,7 +1,7 @@
 def my_round(floatnum,accdigit):
     i=0
-    while (len(str(floatnum).split(".")[0])!=accdigit):
-        if (len(str(floatnum).split(".")[0]))>=accdigit:
+    while (len(str(floatnum).split(".")[0])!=tochnost):
+        if (len(str(floatnum).split(".")[0]))>=tochnost:
             floatnum = floatnum/10
             i=i-1
         else:
@@ -15,7 +15,7 @@ def my_round(floatnum,accdigit):
     rounded=floatnum*(10**(-i))
     return rounded
 
-float_number = float(input("enter number"))
+number = float(input("enter number"))
 #acc_digit = 3 для первого задания
-acc_digit = int(input("Enter accuracy"))
+tochnost = int(input("Enter accuracy"))
 print(my_round(float_number,acc_digit))
