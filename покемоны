@@ -1,0 +1,36 @@
+#1
+import pandas as pd
+
+#2
+raw_data = {"name": ['Bulbasaur', 'Charmander','Squirtle','Caterpie'],
+            "evolution": ['Ivysaur','Charmeleon','Wartortle','Metapod'],
+            "type": ['grass', 'fire', 'water', 'bug'],
+            "hp": [45, 39, 44, 45],
+            "pokedex": ['yes', 'no','yes','no']                        
+            }
+
+#3
+pokemon = pd.DataFrame(raw_data)
+pokemon.head()
+
+#4
+pokemon = pokemon[['name', 'type', 'hp', 'evolution','pokedex']]
+pokemon
+
+#5
+pokemon['place'] = ['park','street','lake','forest']
+pokemon
+
+#6
+pokemon.dtypes
+
+#BONUS
+#Добавить столбец attack со случайными целыми значениями от 40 до 80 для каждого покемона. Затем посчитать среднюю атаку для покемонов, которые есть в покедексе (pokedex == 'yes').
+import numpy as np
+
+pokemon['attack'] = np.random.randint(40, 81, size=len(pokemon))
+
+mean_attack = pokemon[pokemon['pokedex'] == 'yes']['attack'].mean()
+print(f"Средняя атака покемонов в покедексе: {mean_attack:.1f}")
+
+pokemon
