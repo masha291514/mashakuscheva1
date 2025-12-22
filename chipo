@@ -1,0 +1,54 @@
+#Step 1. Import the necessary libraries
+import pandas as pd
+import numpy as np
+#Step 2. Import the dataset from this address.
+
+#Step 3. Assign it to a variable called chipo.
+url = 'https://raw.githubusercontent.com/justmarkham/DAT8/master/data/chipotle.tsv'
+chipo = pd.read_csv(url, sep = '\t')
+#Step 4. See the first 10 entries
+chipo.head(10)
+#Step 5. What is the number of observations in the dataset?
+chipo.shape[0]
+#Step 6. What is the number of columns in the dataset?
+chipo.shape[1]
+#Step 7. Print the name of all the columns.
+chipo.columns 
+#Step 8. How is the dataset indexed?
+chipo.index 
+#Step 9. Which was the most-ordered item?
+a = chipo.groupby('item_name')
+a = a.sum()
+a = a.sort_values(['quantity'], ascending=False)
+a.head(1)
+#Step 10. For the most-ordered item, how many items were ordered?
+a = chipo.groupby('item_name')
+a = a.sum()
+a = a.sort_values(['quantity'], ascending=False)
+a.head(1) 
+#Step 11. What was the most ordered item in the choice_description column?
+a = chipo.groupby('choice_description').sum()
+a = a.sort_values(['quantity'], ascending=False)
+a.head(1) 
+#Step 12. How many items were orderd in total?
+total_items_orders = chipo.quantity.sum()
+total_items_orders 
+  #Step 13. Turn the item price into a float
+#Step 13.a. Check the item price type
+chipo.item_price.dtype 
+#Step 13.b. Create a lambda function and change the type of item price
+dollarizer = lambda x: float(x[1:-1])
+chipo.item_price = chipo.item_price.apply(dollarizer) 
+#Step 13.c. Check the item price type
+chipo.item_price.dtype
+#Step 14. How much was the revenue for the period in the dataset?
+revenue = (chipo['quantity']* chipo['item_price']).sum()
+print('Выручка: $' + str(np.round(revenue,2)))
+#Step 15. How many orders were made in the period?
+order = chipo.order_id.value_counts().count()
+order 
+#Step 16. What is the average revenue amount per order?
+average_revenue_per_order = (chipo['quantity'] * chipo['item_price']).groupby(chipo['order_id']).sum().mean()
+print(f"Average revenue per order: ${average_revenue_per_order:.2f}")
+#Step 17. How many different items are sold?
+chipo.item_name.value_counts().count()
