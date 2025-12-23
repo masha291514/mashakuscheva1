@@ -1,0 +1,42 @@
+# Гипотеза Коллатца для чисел от 1 до 25
+
+def collatz_sequence(n):
+    """
+    Возвращает последовательность Коллатца для числа n.
+    Если n четное: n = n / 2
+    Если n нечетное: n = 3n + 1
+    """
+    seq = [n]
+    while n != 1:
+        if n % 2 == 0:
+            n = n // 2
+        else:
+            n = 3 * n + 1
+        seq.append(n)
+    return seq
+
+# Анализируем числа от 1 до 25
+print("Гипотеза Коллатца для чисел от 1 до 25:")
+print("=" * 50)
+
+for n in range(1, 26):
+    seq = collatz_sequence(n)
+    print(f"n = {n:2d}: длина = {len(seq):2d}, макс = {max(seq):5d}")
+    # Показываем последовательность (первые и последние элементы, если длинная)
+    if len(seq) <= 15:
+        print(f"      {seq}")
+    else:
+        print(f"      {seq[:5]}...{seq[-5:]}")
+    print("-" * 50)
+
+# Проверяем гипотезу
+all_reach_one = True
+for n in range(1, 26):
+    seq = collatz_sequence(n)
+    if seq[-1] != 1:
+        all_reach_one = False
+        break
+
+print("\nВывод:")
+print(f"Для всех чисел от 1 до 25 гипотеза Коллатца верна: {all_reach_one}")
+print("Все последовательности достигают 1.")
